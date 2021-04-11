@@ -1,0 +1,29 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% block title_block %}List{% endblock title_block %}
+{% block body_block %}
+<div class="container my-3">
+{% if users %}
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td><a href="{% url "home_app:delete" user.id %}" class="btn btn-danger my-2">delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}<h1 style="text-align:center">No forms submitted yet!</h1>
+      {% endif %}
+</div>
+{% endblock body_block %}

@@ -1,0 +1,29 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+alert('Form is submitted');
+  var bol = 0;
+  console.log('hey')
+  const buttn = document.getElementById('aj')
+  const form = document.getElementById('form')
+  buttn.addEventListener("click", function(){bol = 1;alert('Form is submitted');})
+  if(bol===1){
+    form.addEventListener("submit", submithandler);
+    bol = 0;
+    alert('Form is submitted');
+  }
+  function submithandler(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url:'{% url 'home_app:home' %}',
+      data:$("#form").serialize(),
+      dataType:'json'
+      success: function(data){
+        if(data.msg==='Success'){
+          alert('Form is submitted')
+        }
+      }
+    })
+  }
+</script>
